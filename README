@@ -1,0 +1,40 @@
+Wiky - a Ruby library to convert Wiki Markup language to HTML.
+=======================
+
+Introduction
+-------------------
+Wiky is a Ruby library that converts Wiki Markup language to HTML.
+
+
+How to use it
+-------------------
+Wiky has only one function, which is Wiky.process(wikitext).
+
+require 'wiky'
+
+html = Wiky.process(wikitext)
+
+
+Supported Syntax
+-------------------
+== Heading ==
+=== Subheading ===
+[http://www.url.com Name of URLs]
+[[File:http://www.url.com/image.png Alternative Text]]
+ -------------------- (Horizontal line)
+: (Indentation)
+# Ordered bullet point
+* Unordered bullet point
+
+Future Work
+-------------------
+Wiky (Ruby) and Wiky.js (Javascript) are the foundation for my future rich content textbox.
+
+License
+------------------
+You can do whatever you want with it. Just give me some credit. (Apache License)
+
+
+Contributors
+-------------------
+Tanin Na Nakorn
