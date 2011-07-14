@@ -223,6 +223,22 @@ module Wiky
     return html;
   end
   
+  def self.process_video(url)
+    
+
+    if (url.match(/^(https?:\/\/)?(www.)?youtube.com\//) == nil)
+      return "<b>"+url+" is an invalid YouTube URL</b>";
+    end
+    
+    if ((result = url.match(/^(https?:\/\/)?(www.)?youtube.com\/watch\?(.*)v=([^&]+)/)) != nil)
+      url = "http://www.youtube.com/embed/"+result[4];
+    end
+    
+    
+    return '<iframe width="480" height="390" src="'+url+'" frameborder="0" allowfullscreen></iframe>';
+
+  end
+  
   def self.process_image(wikitext)
     index = wikitext.index(" ") || -1
     url = wikitext
@@ -270,6 +286,22 @@ module Wiky
     
       index = wikitext.index("[[File:",end_index+1) || -1
       end_index = wikitext.index("]]", index + 7) || -1
+    end
+    
+    # Video
+    index = wikitext.index("[[Video:") || -1
+    end_index = wikitext.index("]]", index + 8) || -1
+    while (index > -1 and end_index > -1) 
+    
+      new_wikitext = ""
+      new_wikitext += wikitext[0..index-1] if index > 0
+      new_wikitext += self.process_video(wikitext[index+8..end_index-1])
+      new_wikitext += wikitext[end_index+2..-1] if (end_index+2) < (wikitext.length-1)
+    
+      wikitext = new_wikitext
+    
+      index = wikitext.index("[[Video:",end_index+1) || -1
+      end_index = wikitext.index("]]", index + 8) || -1
     end
     
     
