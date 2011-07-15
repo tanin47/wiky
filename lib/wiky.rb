@@ -1,6 +1,7 @@
 module Wiky
   def self.get_attachments(wikitext)
-    return wikitext.scan(/\[\[File:[^\]\n\r]+\]\]/).map { |img| img[7..-3] }
+    return [] if wikitext == nil
+    return wikitext.scan(/\[\[File:[^\]\n\r ]+\]\]/).map { |img| img[7..-3] }
   end
   
   def self.process(wikitext)
